@@ -1,73 +1,73 @@
-let userScore=0;
-let pcScore=0;
-let userChoice=0;
-let ListID=["1","2","3"];
-let actions={
+let userScore = 0;
+let pcScore = 0;
+let userChoice = 0;
+let ListID = ["1","2","3"];
+let actions = {
     1: "rock",
     2: "paper",
     3: "scissors"
 }
 
-let computerGame= function(){
-    let randomNumber= Math.floor(Math.random() * (3) + 1);
+let computerGame = function(){
+    let randomNumber = Math.floor(Math.random() * (3) + 1);
     return randomNumber;
 }
 
 function playRound(useroption, computer){
-    let msg=""
-    if(useroption===computer){
-        msg=`It's a tigh!`
+    let msg = "";
+    if(useroption === computer){
+        msg = `It's a tie!`
     }
     else if(useroption>computer && useroption!=3){
-        msg=`You Scored. ${actions[useroption]} beats ${actions[computer]}!`
+        msg = `You Scored. ${actions[useroption]} beats ${actions[computer]}!`;
         userScore++;
     }
-    else if(useroption==1 && computer==3){
-        msg=`You Scored. ${actions[useroption]} beats ${actions[computer]}!`
+    else if(useroption == 1 && computer == 3){
+        msg = `You Scored. ${actions[useroption]} beats ${actions[computer]}!`;
         userScore++;
     }
     else{
-        msg=`You Lost. ${actions[computer]} beats ${actions[useroption]}!`
+        msg = `You Lost. ${actions[computer]} beats ${actions[useroption]}!`;
         pcScore++;
     }
     return msg;
 }
 
 function checkWin(){
-    let message="";
-    if(userScore==5) message="You Won! Congrats!"
-    if(pcScore==5) message="You Lost!"
+    let message = "";
+    if(userScore == 5) message = "You Won! Congrats!";
+    if(pcScore == 5) message = "You Lost!";
     return message;
 }
 
 function game(){
-    let pc=computerGame();
+    let pc = computerGame();
     computerAction.setAttribute('id', actions[pc]);
     computerAction.style.display="block";
-    let res=playRound(userChoice,pc);
-    next.style.display="block";
-    start.style.display="none";
+    let res = playRound(userChoice,pc);
+    next.style.display = "block";
+    start.style.display = "none";
     resultText.textContent = res;
     if(pcScore == 5 || userScore == 5){
-        next.style.display="none";
-        refresh.style.display="block";
+        next.style.display = "none";
+        refresh.style.display = "block";
         resultText.textContent = checkWin();  
     }
-    scores.textContent=`player: ${userScore} -------------------------------------- ${pcScore} :Computer`
+    scores.textContent = `player: ${userScore} -------------------------------------- ${pcScore} :Computer`
 }
 
-let getUserChoice= function(num){
-    userChoice=num;
+let getUserChoice = function(num){
+    userChoice = num;
     console.log(userChoice);
 }
 
 let refreshGame =  function(){
-    userScore=0;
-    pcScore=0;
-    computerAction.style.display="none";
-    refresh.style.display="none";
-    next.style.display="none";
-    start.style.display="block";
+    userScore = 0;
+    pcScore = 0;
+    computerAction.style.display = "none";
+    refresh.style.display = "none";
+    next.style.display = "none";
+    start.style.display = "block";
     scores.textContent = `player: 0 -------------------------------------- 0 :Computer`;
     resultText.textContent = "Please choose one of the actions!";
 }
@@ -96,7 +96,7 @@ gameBoard.append(computerBox);
 document.body.appendChild(gameBoard);
 
 //create buttons for options
-for(let i=1;i<4;i++){
+for(let i = 1;i<4;i++){
     const button = document.createElement("button");
     button.setAttribute('id',actions[i]);
     button.classList.add("game-board-buttons");
@@ -107,12 +107,12 @@ for(let i=1;i<4;i++){
 //adding eventListenr to options
 const options = document.querySelectorAll(".game-board-buttons");
 options.forEach((butt)=>{
-    let num=0;
-    let attribute=butt.getAttribute('id');
+    let num = 0;
+    let attribute = butt.getAttribute('id');
     console.log(butt);
-    if(attribute=="rock") num=1;
-    else if(attribute==("paper")) num=2;
-    else num=3;
+    if(attribute == "rock") num=1;
+    else if(attribute == ("paper")) num = 2;
+    else num = 3;
     butt.addEventListener("click", ()=>{
         getUserChoice(num);
     });
@@ -156,10 +156,10 @@ controlB[0].addEventListener('click', ()=>{
         }   
 );
 controlB[1].addEventListener('click',(e)=>{
-    next.style.display="none";
-    start.style.display="block";
-    resultText.textContent="Please choose one of the actions!"
-    computerAction.style.display="none";
+    next.style.display = "none";
+    start.style.display = "block";
+    resultText.textContent = "Please choose one of the actions!"
+    computerAction.style.display = "none";
 });
 controlB[2].addEventListener('click',()=>{
     refreshGame();
